@@ -1,0 +1,34 @@
+import pandas as pd
+import numpy as np
+## Merging
+mahasiswa = pd.DataFrame({'NRP': ['0057', '0117', '0069', '0097'],
+                     'JK': ['P', 'P', 'P', 'P'], # JK=Jenis Kelamin
+                     'Usia': ['20', '21', '20', '21']})
+
+nilai = pd.DataFrame({'NRP': ['0057', '0117', '0097'],
+                      'JK': ['P', 'P', 'P'],
+                      'IPK': ['3.94', '3.34', '3.11'],
+                      'Nilai': ['A', 'AB', 'B']})
+
+hasil = pd.merge(mahasiswa, nilai, on='NRP')
+hasil
+hasil_outer = pd.merge(mahasiswa, nilai, how='outer', on=['NRP', 'JK'])
+hasil_outer
+hasil_inner = pd.merge(mahasiswa, nilai, how='inner', on=['NRP', 'JK'])
+hasil_inner
+mahasiswa = pd.DataFrame({'NRP': ['0057', '0117', '0069', '0097'],
+                     'Matkul': ['ADW', 'ADK', 'AnSur', 'AnRel'],
+                     'JK': ['P', 'P', 'P', 'P'], 
+                     'Usia': ['20', '21', '20', '21']})
+
+nilai = pd.DataFrame({'NRP': ['0057', '0117', '0097'],
+                      'Matkul': ['ADW', 'ADK', 'PK'],
+                      'JK': ['P', 'P', 'P'],
+                      'IPK': ['3.94', '3.34', '3.11'],
+                      'Nilai': ['A', 'AB', 'B']})
+hasil2 = pd.merge(mahasiswa, nilai, on=['NRP', 'Matkul'])
+hasil2
+hasil2['Tinggi Badan'] = ['163', '167']
+hasil2
+hasil3 = hasil2.drop(['Nilai'], axis=1)
+hasil3
